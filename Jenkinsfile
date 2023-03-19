@@ -22,8 +22,8 @@ pipeline {
         stage('Docker Build and PUsh') {
             steps {
               sh "printenv"
-              sh 'docker build -t RamaVilluri/numericapp:""$GIT_COMMIT"" .' 
-              sh 'docker push RamaVilluri/numericapp:""$GIT_COMMIT"" .'          
+              sh 'docker build -t ramavilluri/numericapp:""$GIT_COMMIT"" .' 
+              sh 'docker push ramavilluri/numericapp:""$GIT_COMMIT"" .'          
             }
         }        
     }
