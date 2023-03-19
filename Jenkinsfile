@@ -27,6 +27,15 @@ pipeline {
                 sh 'docker push ramavilluri/numericapp:""$GIT_COMMIT""' 
               }         
             }
-        }        
+        }
+        stage('Kubernetes Deployment - DEV') {
+            steps {
+              withKubeConfig([credentialsId: "kubeconfig"]) {
+                sh "printenv"
+                sh "sed -i 's#replace#ramavilluri/numericapp:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
+                sh "kubectl apply -f k8s_deployment_service.yaml" 
+              }         
+            }
+        }         
     }
 }
