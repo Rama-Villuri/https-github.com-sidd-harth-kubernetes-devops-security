@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Kubernetes Deployment - DEV') {
             steps {
-              withKubeConfig([credentialsId: "kubeconfig"]) {
+              withKubeConfig([credentialsId: "kubeadmin", serverUrl: 'https://127.0.0.1:6443']) {
                 sh "printenv"
                 sh "sed -i 's#replace#ramavilluri/numericapp:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
                 sh "kubectl apply -f k8s_deployment_service.yaml" 
